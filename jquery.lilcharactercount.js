@@ -36,19 +36,22 @@
       
       $counter.text(options.limit - charCount);
       
+      if (options.submitButton != "" && charCount > options.limit) {
+        disableSubmit();
+      } else {
+        disableSubmit(false);
+      }
+      
       if (charCount >= options.limit) {
         switchClass(options.dangerClass);
         if (options.allowExceed == false) {
           // Forcefully limit in case of copy+paste > limit
           $this.val($this.val().substring(0, options.limit));
         }
-        if (options.submitButton != "") {disableSubmit()};
         return;
       } else if (options.warning > 0 && charCount >= options.warning) {
-        if (options.submitButton != "") {disableSubmit(false)};
         switchClass(options.warningClass);
       } else {
-        if (options.submitButton != "") {disableSubmit(false)};
         switchClass(options.defaultClass);
       }
     });
