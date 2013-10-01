@@ -11,7 +11,8 @@
       $(document).ready(function() {
         $("#textbox").lilCharacterCount({
           limit: 100,
-          warning: 50
+          warning: 50,
+          submitButton: "submit-button"
         });
       });
     </script>
@@ -36,7 +37,7 @@
       .bg-info {background: #0000cc;}
       .bg-warning {background: #ffbb00;}
       textarea {
-        width: 100%;
+        width: 378px;
         height: 75px;
         margin-bottom: 2px;
         font-family: Arial, sans-serif;
@@ -48,11 +49,17 @@
       dl dd {
         
       }
+      #submit-button {
+        float: right;
+      }
     </style>
   </head>
   <body>
     <section>
-      <textarea name="demo" id="textbox" placeholder="Start typing..."></textarea>
+      <div class="form">
+        <textarea name="demo" id="textbox" placeholder="Start typing..."></textarea>
+        <button class="button" id="submit-button" /> Submit
+      </div>
       <h3>About</h3>
       <p>Uses Twitter's Bootstrap classes as defaults.</p>
       <h3>Usage</h3>
@@ -63,7 +70,8 @@
       <pre><code>
         $("#textbox").lilCharacterCount({
           limit: 100,
-          warning: 50
+          warning: 50,
+          submitButton: "submit-button"
         });
       </code></pre>
       <h3>Options</h3>
@@ -74,6 +82,8 @@
         <dd><em>Number.</em> Toggles the warning class on the counter when this character count is reached. When set to 0, it is disabled. Default: <strong>100</strong></dd>
         <dt><strong>allowExceed</strong></dt>
         <dd><em>Boolean.</em> Determines whether or not typing is allowed past the limit. Default: <strong>true</strong></dd>
+        <dt><strong>submitButton</strong></dt>
+        <dd><em>String.</em> <em>Optional</em> - ID of submit button that will be disabled if limit is exceeded. Default: <strong><em>blank</em></strong></dd>
         <dt><strong>counterClass</strong></dt>
         <dd><em>String.</em> Class for the counter. Default: <strong>character-count</strong></dd>
         <dt><strong>defaultClass</strong></dt>

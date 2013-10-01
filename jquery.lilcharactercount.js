@@ -5,36 +5,22 @@
 
   Copyright (c) 2013 Orlando de Frias
   
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
-  
-  The above copyright notice and this permission notice shall be included in
-  all copies or substantial portions of the Software.
-  
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-  THE SOFTWARE.
+  Free to use under the MIT license.
+  http://www.opensource.org/licenses/mit-license.php
 */
  
 (function($) {
   $.fn.lilCharacterCount = function(options) {
     
     var defaults = {	
-      limit: 140,                        // Character limit
-      warning: 100,                      // Warn when close to limit, leave at 0 for no warning
+      limit: 140,                       // Character limit
+      warning: 100,                     // Warn when close to limit, leave at 0 for no warning
       allowExceed: true,                // If true, it allows typing past limit
       counterClass: "character-count",  // Class for the counter
       defaultClass: "bg-info",          // Class for when all is fine
       warningClass: "bg-warning",       // Class for warning of impending limit
-      dangerClass: "bg-danger"          // Class for limit
+      dangerClass: "bg-danger",         // Class for limit
+      submitButton: ""                  // ID for submit button, leave blank if unused
     };
     
     var options = $.extend(defaults, options); 
@@ -51,19 +37,28 @@
       $counter.text(options.limit - charCount);
       
       if (charCount >= options.limit) {
-        toggleClass(options.dangerClass);
+        switchClass(options.dangerClass);
         if (options.allowExceed == false) {
+          // Forcefully limit in case of copy+paste > limit
           $this.val($this.val().substring(0, options.limit));
         }
+        if (options.submitButton != "") {disableSubmit()};
         return;
       } else if (options.warning > 0 && charCount >= options.warning) {
-        toggleClass(options.warningClass);
+        if (options.submitButton != "") {disableSubmit(false)};
+        switchClass(options.warningClass);
       } else {
-        toggleClass(options.defaultClass);
+        if (options.submitButton != "") {disableSubmit(false)};
+        switchClass(options.defaultClass);
       }
     });
     
-    toggleClass = function(klass) {
+    disableSubmit = function(action = true) {
+      $submit = $("#"+options.submitButton);
+      $submit.attr("disabled", action);
+    }
+    
+    switchClass = function(klass) {
       switch(klass) {
         case options.defaultClass:
           $counter.addClass(options.defaultClass);

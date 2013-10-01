@@ -22,6 +22,7 @@ Option | Type | Description | Default
 `limit` | Number | Sets the character limit for the text box. | 140
 `warning` | Number | Toggles the warning class on the counter when this character count is reached. When set to 0, it is disabled | 100
 `allowExceed` | Boolean | Determines whether or not typing is allowed past the limit. | true
+`submitButton` | String | *Optional* ID of submit button that will be disabled if limit is exceeded. | *blank*
 `counterClass` | String | Class for the counter. | character-count
 `defaultClass` | String | Class applied to counter when the character warning or limit values haven't been exceeded. | bg-info
 `warningClass` | String | Class applied to counter when the character warning values have been exceeded. | bg-warning
