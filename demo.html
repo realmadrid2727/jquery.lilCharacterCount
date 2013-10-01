@@ -9,7 +9,10 @@
     
     <script type="text/javascript">
       $(document).ready(function() {
-        $("textarea[maxlength]").lilCharacterCount();
+        $("#textbox").lilCharacterCount({
+          limit: 100,
+          warning: 50
+        });
       });
     </script>
     
@@ -30,22 +33,56 @@
         font-weight: bold;
       }
       .bg-danger {background: #cc0000;}
-      .bg-success {background: #00cc00;}
+      .bg-info {background: #0000cc;}
+      .bg-warning {background: #ffbb00;}
       textarea {
         width: 100%;
         height: 75px;
         margin-bottom: 2px;
+        font-family: Arial, sans-serif;
+        padding: 10px;
+      }
+      dl {
+        margin: 0 0 10px 0;
+      }
+      dl dd {
+        
       }
     </style>
   </head>
   <body>
     <section>
+      <textarea name="demo" id="textbox" placeholder="Start typing..."></textarea>
+      <h3>About</h3>
+      <p>Uses Twitter's Bootstrap classes as defaults.</p>
       <h3>Usage</h3>
-      <p>Set the <code>maxlength</code> attribute on a textarea or text field, then call the function on the selector of your choice. In this case, it's:</p>
       <pre><code>
-        $("textarea[maxlength]").lilCharacterCount();
+        $("#textbox").lilCharacterCount();
       </code></pre>
-      <textarea name="demo" id="demo" maxlength="140"></textarea>
+      As used in demo:
+      <pre><code>
+        $("#textbox").lilCharacterCount({
+          limit: 100,
+          warning: 50
+        });
+      </code></pre>
+      <h3>Options</h3>
+      <dl>
+        <dt><strong>limit</strong></dt>
+        <dd><em>Number.</em> Sets the character limit for the text box. Default: <strong>140</strong></dd>
+        <dt><strong>warning</strong></dt>
+        <dd><em>Number.</em> Toggles the warning class on the counter when this character count is reached. When set to 0, it is disabled. Default: <strong>100</strong></dd>
+        <dt><strong>allowExceed</strong></dt>
+        <dd><em>Boolean.</em> Determines whether or not typing is allowed past the limit. Default: <strong>true</strong></dd>
+        <dt><strong>counterClass</strong></dt>
+        <dd><em>String.</em> Class for the counter. Default: <strong>character-count</strong></dd>
+        <dt><strong>defaultClass</strong></dt>
+        <dd><em>String.</em> Class applied to counter when the character warning or limit values haven't been exceeded. Default: <strong>bg-info</strong></dd>
+        <dt><strong>warningClass</strong></dt>
+        <dd><em>String.</em> Class applied to counter when the character warning values have been exceeded. Default: <strong>bg-warning</strong></dd>
+        <dt><strong>dangerClass</strong></dt>
+        <dd><em>String.</em> Class applied to counter when the character limit value has been exceeded. Default: <strong>bg-danger</strong></dd>
+      </dl>
     </section>
   </body>
 </html>

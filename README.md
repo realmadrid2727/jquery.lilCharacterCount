@@ -1,18 +1,31 @@
 jquery.lilCharacterCount
 ========================
 
-A lightweight jQuery character countdown utility for maxlength text fields. The behavior is similar to Twitter's input field.
+A lightweight jQuery character countdown utility for text fields, similar in behavior to Twitter's countdown text box. Uses Twitter's Bootstrap classes as defaults.
 
-### Usage
-
-Set the `maxlength` attribute on a textarea or text field, then call the function on the selector of your choice.
-
-    $("textarea[maxlength]").lilCharacterCount();
-
+### Usage</h3>
+Simple:
+```javascript
+$("#textbox").lilCharacterCount();
+```
+As used in demo:
+```javascript
+$("#textbox").lilCharacterCount({
+  limit: 100,
+  warning: 50
+});
+```
 ### Options
 
-There are no options. Set the character limit in the textarea/text input field's `maxlength` attribute. The class for the field not exceeding the character count follows the Bootstrap convention, `bg-success`. Exceeding character count is `bg-danger`.
+Option | Type | Description | Default
+--- | --- | --- | ----
+`limit` | Number | Sets the character limit for the text box. | 140
+`warning` | Number | Toggles the warning class on the counter when this character count is reached. When set to 0, it is disabled | 100
+`allowExceed` | Boolean | Determines whether or not typing is allowed past the limit. | true
+`counterClass` | String | Class for the counter. | character-count
+`defaultClass` | String | Class applied to counter when the character warning or limit values haven't been exceeded. | bg-info
+`warningClass` | String | Class applied to counter when the character warning values have been exceeded. | bg-warning
+`dangerClass` | String | Class applied to counter when the character limit value has been exceeded. | bg-danger
 
-### Copyright
-
-None. Go nuts.
+### License
+MIT License. Copyright 2013 Orlando de Frias. http://orlandodefrias.com
